@@ -2,6 +2,7 @@
 import React from 'react';
 import { PieChart as RechartsPieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ChartContainer } from '../ui/chart';
+import { formatIndianRupees } from '../visualization/CurrencyFormatter';
 
 interface PieChartProps {
   data: any;
@@ -14,7 +15,7 @@ const formatCurrency = (value: number, currency?: string) => {
 
   switch (currency) {
     case 'INR':
-      return `₹${value.toLocaleString('en-IN')}`;
+      return formatIndianRupees(value);
     default:
       return `$${value.toLocaleString()}`;
   }
@@ -54,7 +55,8 @@ export const PieChart = ({ data, options, currency }: PieChartProps) => {
           outerRadius={80}
           fill="#8884d8"
           dataKey="value"
-          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+          // Remove the label that causes overlapping
+          label={false}
         >
           {transformedData.map((entry: any, index: number) => (
             <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />

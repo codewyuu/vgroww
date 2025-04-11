@@ -30,6 +30,25 @@ const DistributionTab: React.FC = () => {
           options={{
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+              tooltip: {
+                backgroundColor: '#1A1F2C',
+                titleColor: '#FFFFFF',
+                bodyColor: '#FFFFFF',
+                borderColor: '#0EA5E9',
+                borderWidth: 1,
+              },
+              legend: {
+                position: 'bottom',
+                labels: {
+                  padding: 20,
+                  boxWidth: 15,
+                  font: {
+                    size: 12
+                  }
+                }
+              }
+            }
           }}
         />
       </CardContent>
