@@ -81,7 +81,7 @@ const Dashboard = () => {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{formatIndianRupees(24780)}</div>
+            <div className="text-2xl font-bold">₹24,780</div>
             <p className="text-xs text-muted-foreground">
               <span className="text-emerald-500 flex items-center">
                 <ArrowUpRight className="mr-1 h-4 w-4" />+8.2%
