@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
-import { LineChart } from '@/components/charts';
+import { LineChart, PieChart } from '@/components/charts';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 
@@ -14,6 +14,11 @@ const Visualization = () => {
   const [marketingBudget, setMarketingBudget] = useState(10000);
   const [churnRate, setChurnRate] = useState(5);
   const [showPrediction, setShowPrediction] = useState(true);
+  
+  // Format currency in Indian Rupees
+  const formatIndianRupees = (value: number) => {
+    return `₹${value.toLocaleString('en-IN')}`;
+  };
   
   // Mock chart data
   const getChartData = () => {
@@ -62,6 +67,19 @@ const Visualization = () => {
     };
   };
 
+  // Get distribution data for pie chart
+  const getDistributionData = () => {
+    return {
+      labels: ['Active Users', 'New Signups', 'Dormant Users'],
+      datasets: [
+        {
+          data: [65, 25, 10],
+          backgroundColor: ['#0088FE', '#FF8042', '#E0E0E0'],
+        }
+      ]
+    };
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -83,6 +101,7 @@ const Visualization = () => {
           <TabsTrigger value="growth">Growth Trajectory</TabsTrigger>
           <TabsTrigger value="roi">ROI Analysis</TabsTrigger>
           <TabsTrigger value="churn">Churn Impact</TabsTrigger>
+          <TabsTrigger value="distribution">User Distribution</TabsTrigger>
         </TabsList>
         <TabsContent value="growth">
           <Card className="mb-4">
@@ -96,9 +115,9 @@ const Visualization = () => {
               <div className="grid gap-6">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label>Marketing Budget: ${marketingBudget.toLocaleString()}</Label>
+                    <Label>Marketing Budget: {formatIndianRupees(marketingBudget)}</Label>
                     <span className="text-sm text-muted-foreground">
-                      ${(marketingBudget / 1000).toFixed(1)}k/month
+                      {formatIndianRupees(marketingBudget / 1000)}/month
                     </span>
                   </div>
                   <Slider 
@@ -197,6 +216,24 @@ const Visualization = () => {
               <div className="h-96 flex items-center justify-center text-muted-foreground">
                 Churn impact visualization coming soon
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="distribution">
+          <Card>
+            <CardHeader>
+              <CardTitle>User Distribution</CardTitle>
+              <CardDescription>Current user state</CardDescription>
+            </CardHeader>
+            <CardContent className="h-96">
+              <PieChart 
+                data={getDistributionData()} 
+                currency="INR"
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                }}
+              />
             </CardContent>
           </Card>
         </TabsContent>
