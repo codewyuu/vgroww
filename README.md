@@ -1,7 +1,7 @@
 
-# GrowthSim - Startup Growth Simulator
+# vgroww - Startup Growth Simulator
 
-GrowthSim is a powerful tool for modeling a startup's growth trajectory based on inputs like marketing spend, user acquisition rates, and churn.
+vgroww is a powerful tool for modeling a startup's growth trajectory based on inputs like marketing spend, user acquisition rates, and churn.
 
 ## Features
 
@@ -32,7 +32,7 @@ npm run dev
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/growthsim.git
+git clone https://github.com/yourusername/vgroww.git
 cd growthsim
 
 # Make the installation script executable
