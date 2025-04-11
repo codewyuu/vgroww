@@ -81,7 +81,7 @@ const DataSets = () => {
   const [acquisitions, setAcquisitions] = useState('500');
   const [conversion, setConversion] = useState('2.5');
   const [cac, setCAC] = useState('10');
-  const [period, setPeriod] = useState('q1_2023');
+  const [period, setPeriod] = useState('q1_2024');
   const [notes, setNotes] = useState('');
   
   const [revenuePerCustomer, setRevenuePerCustomer] = useState('100');
@@ -258,7 +258,34 @@ const DataSets = () => {
       'q2_2023': 'Q2 2023',
       'q3_2023': 'Q3 2023',
       'q4_2023': 'Q4 2023',
-      'q1_2024': 'Q1 2024'
+      'q1_2024': 'Q1 2024',
+      'q2_2024': 'Q2 2024',
+      'q3_2024': 'Q3 2024',
+      'q4_2024': 'Q4 2024',
+      'q1_2025': 'Q1 2025',
+      'q2_2025': 'Q2 2025',
+      'q3_2025': 'Q3 2025',
+      'q4_2025': 'Q4 2025',
+      'q1_2026': 'Q1 2026',
+      'q2_2026': 'Q2 2026',
+      'q3_2026': 'Q3 2026',
+      'q4_2026': 'Q4 2026',
+      'q1_2027': 'Q1 2027',
+      'q2_2027': 'Q2 2027',
+      'q3_2027': 'Q3 2027',
+      'q4_2027': 'Q4 2027',
+      'q1_2028': 'Q1 2028',
+      'q2_2028': 'Q2 2028',
+      'q3_2028': 'Q3 2028',
+      'q4_2028': 'Q4 2028',
+      'q1_2029': 'Q1 2029',
+      'q2_2029': 'Q2 2029',
+      'q3_2029': 'Q3 2029',
+      'q4_2029': 'Q4 2029',
+      'q1_2030': 'Q1 2030',
+      'q2_2030': 'Q2 2030',
+      'q3_2030': 'Q3 2030',
+      'q4_2030': 'Q4 2030'
     };
     return periodMap[value] || value;
   };
@@ -377,16 +404,45 @@ const DataSets = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="period">Time Period</Label>
-                    <Select defaultValue="q1_2023" value={period} onValueChange={setPeriod}>
+                    <Select defaultValue="q1_2024" value={period} onValueChange={setPeriod}>
                       <SelectTrigger id="period">
                         <SelectValue placeholder="Select period" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="q1_2023">Q1 2023</SelectItem>
-                        <SelectItem value="q2_2023">Q2 2023</SelectItem>
-                        <SelectItem value="q3_2023">Q3 2023</SelectItem>
-                        <SelectItem value="q4_2023">Q4 2023</SelectItem>
                         <SelectItem value="q1_2024">Q1 2024</SelectItem>
+                        <SelectItem value="q2_2024">Q2 2024</SelectItem>
+                        <SelectItem value="q3_2024">Q3 2024</SelectItem>
+                        <SelectItem value="q4_2024">Q4 2024</SelectItem>
+
+                        <SelectItem value="q1_2025">Q1 2025</SelectItem>
+                        <SelectItem value="q2_2025">Q2 2025</SelectItem>
+                        <SelectItem value="q3_2025">Q3 2025</SelectItem>
+                        <SelectItem value="q4_2025">Q4 2025</SelectItem>
+
+                        <SelectItem value="q1_2026">Q1 2026</SelectItem>
+                        <SelectItem value="q2_2026">Q2 2026</SelectItem>
+                        <SelectItem value="q3_2026">Q3 2026</SelectItem>
+                        <SelectItem value="q4_2026">Q4 2026</SelectItem>
+
+                        <SelectItem value="q1_2027">Q1 2027</SelectItem>
+                        <SelectItem value="q2_2027">Q2 2027</SelectItem>
+                        <SelectItem value="q3_2027">Q3 2027</SelectItem>
+                        <SelectItem value="q4_2027">Q4 2027</SelectItem>
+
+                        <SelectItem value="q1_2028">Q1 2028</SelectItem>
+                        <SelectItem value="q2_2028">Q2 2028</SelectItem>
+                        <SelectItem value="q3_2028">Q3 2028</SelectItem>
+                        <SelectItem value="q4_2028">Q4 2028</SelectItem>
+
+                        <SelectItem value="q1_2029">Q1 2029</SelectItem>
+                        <SelectItem value="q2_2029">Q2 2029</SelectItem>
+                        <SelectItem value="q3_2029">Q3 2029</SelectItem>
+                        <SelectItem value="q4_2029">Q4 2029</SelectItem>
+
+                        <SelectItem value="q1_2030">Q1 2030</SelectItem>
+                        <SelectItem value="q2_2030">Q2 2030</SelectItem>
+                        <SelectItem value="q3_2030">Q3 2030</SelectItem>
+                        <SelectItem value="q4_2030">Q4 2030</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -648,17 +704,45 @@ const DataSets = () => {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="customPeriod">Time Period</Label>
-                  <Select defaultValue="q1_2023">
+                  <Select defaultValue="q1_2024">
                     <SelectTrigger id="customPeriod">
                       <SelectValue placeholder="Select period" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="q1_2023">Q1 2023</SelectItem>
-                      <SelectItem value="q2_2023">Q2 2023</SelectItem>
-                      <SelectItem value="q3_2023">Q3 2023</SelectItem>
-                      <SelectItem value="q4_2023">Q4 2023</SelectItem>
                       <SelectItem value="q1_2024">Q1 2024</SelectItem>
-                      <SelectItem value="custom">Custom Period</SelectItem>
+                      <SelectItem value="q2_2024">Q2 2024</SelectItem>
+                      <SelectItem value="q3_2024">Q3 2024</SelectItem>
+                      <SelectItem value="q4_2024">Q4 2024</SelectItem>
+
+                      <SelectItem value="q1_2025">Q1 2025</SelectItem>
+                      <SelectItem value="q2_2025">Q2 2025</SelectItem>
+                      <SelectItem value="q3_2025">Q3 2025</SelectItem>
+                      <SelectItem value="q4_2025">Q4 2025</SelectItem>
+
+                      <SelectItem value="q1_2026">Q1 2026</SelectItem>
+                      <SelectItem value="q2_2026">Q2 2026</SelectItem>
+                      <SelectItem value="q3_2026">Q3 2026</SelectItem>
+                      <SelectItem value="q4_2026">Q4 2026</SelectItem>
+
+                      <SelectItem value="q1_2027">Q1 2027</SelectItem>
+                      <SelectItem value="q2_2027">Q2 2027</SelectItem>
+                      <SelectItem value="q3_2027">Q3 2027</SelectItem>
+                      <SelectItem value="q4_2027">Q4 2027</SelectItem>
+
+                      <SelectItem value="q1_2028">Q1 2028</SelectItem>
+                      <SelectItem value="q2_2028">Q2 2028</SelectItem>
+                      <SelectItem value="q3_2028">Q3 2028</SelectItem>
+                      <SelectItem value="q4_2028">Q4 2028</SelectItem>
+
+                      <SelectItem value="q1_2029">Q1 2029</SelectItem>
+                      <SelectItem value="q2_2029">Q2 2029</SelectItem>
+                      <SelectItem value="q3_2029">Q3 2029</SelectItem>
+                      <SelectItem value="q4_2029">Q4 2029</SelectItem>
+
+                      <SelectItem value="q1_2030">Q1 2030</SelectItem>
+                      <SelectItem value="q2_2030">Q2 2030</SelectItem>
+                      <SelectItem value="q3_2030">Q3 2030</SelectItem>
+                      <SelectItem value="q4_2030">Q4 2030</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
