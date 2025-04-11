@@ -28,7 +28,7 @@ export const objectsToCSV = (data: any[]) => {
   
   for(const row of data) {
     const values = headers.map(header => {
-      const escaped = (''+row[header]).replace(/"/g, '\\"');
+      const escaped = String(row[header]).replace(/"/g, '\\"');
       return `"${escaped}"`;
     });
     csvRows.push(values.join(','));
@@ -49,4 +49,9 @@ export const downloadFile = (content: string, filename: string) => {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  
+  // Clean up URL object after download is triggered
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+  }, 100);
 };
