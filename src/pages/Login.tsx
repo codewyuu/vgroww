@@ -22,8 +22,15 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
-      <Card className="w-full max-w-md shadow-lg">
+    <div 
+      className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: 'url("/lovable-uploads/d8b1d151-0a13-41b0-bc3f-629b96e79966.png")',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Darkening overlay
+        backgroundBlendMode: 'overlay' // This creates the transparency effect
+      }}
+    >
+      <Card className="w-full max-w-md shadow-lg bg-white/90 dark:bg-black/80 backdrop-blur-sm border-opacity-20">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">vgroww</CardTitle>
           <CardDescription className="text-center">
