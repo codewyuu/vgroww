@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -9,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
-import { UploadCloud, Save, Download, Plus, AlertTriangle, FileUp } from 'lucide-react';
+import { UploadCloud, Save, Download, Plus, AlertTriangle, FileUp, X } from 'lucide-react';
 import { parseCSV, objectsToCSV, downloadFile } from '@/utils/csvUtils';
 
 type MarketingData = {
@@ -20,6 +19,13 @@ type MarketingData = {
   cac: string;
   conversion: string;
   notes?: string;
+};
+
+type DataSetType = {
+  id: string;
+  name: string;
+  type: string;
+  createdAt: string;
 };
 
 const DataSets = () => {
@@ -63,7 +69,8 @@ const DataSets = () => {
     }
   ]);
 
-  // Form states
+  const [customDataSets, setCustomDataSets] = useState<DataSetType[]>([]);
+
   const [channel, setChannel] = useState('social');
   const [spend, setSpend] = useState('5000');
   const [acquisitions, setAcquisitions] = useState('500');
@@ -71,16 +78,16 @@ const DataSets = () => {
   const [cac, setCAC] = useState('10');
   const [period, setPeriod] = useState('q1_2023');
   const [notes, setNotes] = useState('');
+  
+  const [newDataSetName, setNewDataSetName] = useState('');
+  const [showNewDataSetForm, setShowNewDataSetForm] = useState(false);
 
-  // File import reference
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Handle file upload button click
   const handleUploadClick = () => {
     fileInputRef.current?.click();
   };
 
-  // Handle file import
   const handleFileImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -92,7 +99,6 @@ const DataSets = () => {
         const parsedData = parseCSV(csvContent);
         
         if (activeTab === "marketing") {
-          // Map CSV data to marketing data format
           const newMarketingData = parsedData.map(row => ({
             channel: row.channel || '',
             period: row.period || '',
@@ -113,7 +119,6 @@ const DataSets = () => {
         toast.error("Failed to import CSV. Please check the file format.");
       }
       
-      // Reset the file input
       if (fileInputRef.current) fileInputRef.current.value = '';
     };
     
@@ -125,7 +130,6 @@ const DataSets = () => {
     reader.readAsText(file);
   };
 
-  // Handle data export
   const handleExport = () => {
     try {
       let filename = '';
@@ -147,7 +151,6 @@ const DataSets = () => {
     }
   };
 
-  // Handle save form data
   const handleSaveData = () => {
     const newEntry: MarketingData = {
       channel: getChannelLabel(channel),
@@ -162,11 +165,31 @@ const DataSets = () => {
     setMarketingData([...marketingData, newEntry]);
     toast.success("Data saved successfully");
     
-    // Reset form (optional)
     setNotes('');
   };
 
-  // Helper functions to get labels
+  const handleCreateNewDataSet = () => {
+    setShowNewDataSetForm(true);
+  };
+
+  const handleSaveNewDataSet = () => {
+    if (!newDataSetName.trim()) {
+      toast.error("Please enter a data set name");
+      return;
+    }
+    
+    const newDataSet: DataSetType = {
+      id: `dataset-${Date.now()}`,
+      name: newDataSetName,
+      type: 'custom',
+      createdAt: new Date().toISOString()
+    };
+    
+    setCustomDataSets([...customDataSets, newDataSet]);
+    setNewDataSetName('');
+    toast.success(`New data set "${newDataSetName}" created successfully`);
+  };
+
   const getChannelLabel = (value: string): string => {
     const channelMap: Record<string, string> = {
       'social': 'Social Media',
@@ -202,7 +225,6 @@ const DataSets = () => {
             <UploadCloud className="h-4 w-4" />
             <span>Import</span>
           </Button>
-          {/* Hidden file input */}
           <input
             ref={fileInputRef}
             type="file"
@@ -218,7 +240,10 @@ const DataSets = () => {
             <Download className="h-4 w-4" />
             <span>Export</span>
           </Button>
-          <Button className="flex items-center gap-2">
+          <Button 
+            className="flex items-center gap-2"
+            onClick={handleCreateNewDataSet}
+          >
             <Plus className="h-4 w-4" />
             <span>New Data Set</span>
           </Button>
@@ -405,6 +430,127 @@ const DataSets = () => {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {showNewDataSetForm && (
+        <Card className="mt-6">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>New Custom Data Set</CardTitle>
+              <CardDescription>Create a new custom data set for your specific needs</CardDescription>
+            </div>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => setShowNewDataSetForm(false)}
+              className="rounded-full h-8 w-8"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="dataSetName">Data Set Name</Label>
+                <Input 
+                  id="dataSetName" 
+                  placeholder="Enter a name for your data set"
+                  value={newDataSetName}
+                  onChange={(e) => setNewDataSetName(e.target.value)}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="customChannel">Channel</Label>
+                  <Select defaultValue="social">
+                    <SelectTrigger id="customChannel">
+                      <SelectValue placeholder="Select channel" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="social">Social Media</SelectItem>
+                      <SelectItem value="search">Search Engine</SelectItem>
+                      <SelectItem value="email">Email Marketing</SelectItem>
+                      <SelectItem value="content">Content Marketing</SelectItem>
+                      <SelectItem value="affiliate">Affiliate</SelectItem>
+                      <SelectItem value="custom">Custom Channel</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="customSpend">Monthly Spend ($)</Label>
+                  <Input 
+                    id="customSpend" 
+                    placeholder="e.g. 5000" 
+                    type="number" 
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="customAcquisitions">Monthly Acquisitions</Label>
+                  <Input 
+                    id="customAcquisitions" 
+                    placeholder="e.g. 500" 
+                    type="number" 
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="customConversion">Conversion Rate (%)</Label>
+                  <Input 
+                    id="customConversion" 
+                    placeholder="e.g. 2.5" 
+                    type="number" 
+                    step="0.1" 
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="customCac">Cost per Acquisition ($)</Label>
+                  <Input 
+                    id="customCac" 
+                    placeholder="e.g. 10" 
+                    type="number" 
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="customPeriod">Time Period</Label>
+                  <Select defaultValue="q1_2023">
+                    <SelectTrigger id="customPeriod">
+                      <SelectValue placeholder="Select period" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="q1_2023">Q1 2023</SelectItem>
+                      <SelectItem value="q2_2023">Q2 2023</SelectItem>
+                      <SelectItem value="q3_2023">Q3 2023</SelectItem>
+                      <SelectItem value="q4_2023">Q4 2023</SelectItem>
+                      <SelectItem value="q1_2024">Q1 2024</SelectItem>
+                      <SelectItem value="custom">Custom Period</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              
+              <div>
+                <Label htmlFor="customNotes">Notes</Label>
+                <Textarea 
+                  id="customNotes" 
+                  placeholder="Add any relevant notes about this data set" 
+                />
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <div className="flex items-center text-amber-500">
+              <AlertTriangle className="h-4 w-4 mr-2" />
+              <span className="text-sm">Fill in all required fields</span>
+            </div>
+            <Button className="flex items-center gap-2" onClick={handleSaveNewDataSet}>
+              <Save className="h-4 w-4" />
+              <span>Create Data Set</span>
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
     </div>
   );
 };
