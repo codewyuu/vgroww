@@ -51,7 +51,12 @@ const Visualization = () => {
         </TabsContent>
 
         <TabsContent value="roi">
-          <ROITab />
+          <ROITab 
+            timeRange={timeRange}
+            marketingBudget={marketingBudget}
+            churnRate={churnRate}
+            showPrediction={showPrediction}
+          />
         </TabsContent>
 
         <TabsContent value="distribution">
