@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, LineChart, PieChart } from '@/components/charts';
@@ -6,11 +5,11 @@ import { Button } from '@/components/ui/button';
 import { 
   TrendingUp, 
   Users, 
-  DollarSign, 
   Percent, 
   BarChart3, 
   ArrowUpRight, 
-  ArrowDownRight 
+  ArrowDownRight, 
+  IndianRupee 
 } from 'lucide-react';
 import { formatIndianRupees } from '@/components/visualization/CurrencyFormatter';
 
@@ -78,7 +77,7 @@ const Dashboard = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Monthly Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <IndianRupee className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">₹24,780</div>
