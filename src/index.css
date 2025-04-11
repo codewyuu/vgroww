@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,34 +14,34 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 25 95% 53%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 45 100% 65%;
+    --primary-foreground: 0 0% 20%;
 
-    --secondary: 240 4.8% 95.9%;
+    --secondary: 60 100% 97%;
     --secondary-foreground: 240 5.9% 10%;
 
-    --muted: 210 20% 98%;
+    --muted: 45 10% 97%;
     --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 240 4.8% 95.9%;
+    --accent: 60 100% 97%;
     --accent-foreground: 240 5.9% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 30 10% 90%;
+    --input: 30 10% 90%;
     --ring: 240 5.9% 10%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 240 10% 3.9%;
-    --sidebar-primary: 25 95% 53%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 20% 98%;
+    --sidebar-primary: 45 100% 65%;
+    --sidebar-primary-foreground: 0 0% 20%;
+    --sidebar-accent: 60 100% 97%;
     --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 30 10% 90%;
     --sidebar-ring: 240 5.9% 10%;
   }
 
@@ -105,5 +106,9 @@
   
   .super-card {
     @apply bg-white border border-border rounded-xl super-shadow;
+  }
+
+  .yellow-highlight {
+    @apply bg-secondary inline-block px-1 py-0.5 rounded;
   }
 }

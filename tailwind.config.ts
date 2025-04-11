@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -62,7 +63,18 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				'super-orange': '#FF9900',
+				'super-yellow': {
+					50: '#FFFDF0',
+					100: '#FFF9D1',
+					200: '#FFF5A3',
+					300: '#FFE975',
+					400: '#FFD43B',
+					500: '#FFC800',
+					600: '#E6B000',
+					700: '#CC9C00',
+					800: '#B38800',
+					900: '#8C6A00',
+				},
 				'super-gray': {
 					50: '#FAFAFA',
 					100: '#F5F5F5',

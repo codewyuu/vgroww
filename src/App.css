@@ -6,7 +6,7 @@
   text-align: center;
 }
 
-/* Updating styles to be more like super.so */
+/* Updating styles to be more like super.so with yellow theme */
 body {
   background-color: #FFFFFF;
   color: #171717;
@@ -18,15 +18,15 @@ button {
 }
 
 .super-button {
-  background-color: #FF9900;
-  color: white;
+  background-color: #FFD43B;
+  color: #333333;
   border-radius: 8px;
   font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .super-button:hover {
-  background-color: #F08700;
+  background-color: #FFC800;
 }
 
 /* Keep some of the original styles */
