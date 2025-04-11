@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart } from '@/components/charts';
 import ControlPanel from './ControlPanel';
+import { downloadFile, objectsToCSV } from '@/utils/csvUtils';
+import { toast } from 'sonner';
 
 interface GrowthTabProps {
   timeRange: string;
@@ -71,6 +73,45 @@ const GrowthTab: React.FC<GrowthTabProps> = ({
     };
   };
 
+  const handleExportData = () => {
+    try {
+      const chartData = getChartData();
+      
+      // Transform the chart data into a format suitable for CSV export
+      const exportData = chartData.labels.map((label, index) => {
+        const dataRow: Record<string, any> = {
+          Period: label
+        };
+        
+        // Add actual growth data
+        dataRow['User Growth'] = Math.round(chartData.datasets[0].data[index]);
+        
+        // Add prediction data if available
+        if (showPrediction && chartData.datasets.length > 1) {
+          dataRow['Predicted Growth'] = Math.round(chartData.datasets[1].data[index]);
+        }
+        
+        return dataRow;
+      });
+      
+      // Generate the CSV content
+      const csvContent = objectsToCSV(exportData);
+      
+      // Generate a filename with current date
+      const dateString = new Date().toISOString().split('T')[0];
+      const filename = `growth_trajectory_${timeRange}_${dateString}.csv`;
+      
+      // Download the file
+      downloadFile(csvContent, filename);
+      
+      // Show success message
+      toast.success('Growth data exported successfully');
+    } catch (error) {
+      console.error('Error exporting data:', error);
+      toast.error('Failed to export growth data');
+    }
+  };
+
   return (
     <>
       <Card className="mb-4">
@@ -91,7 +132,7 @@ const GrowthTab: React.FC<GrowthTabProps> = ({
           />
         </CardContent>
         <CardFooter>
-          <Button>Export Data</Button>
+          <Button onClick={handleExportData}>Export Data</Button>
         </CardFooter>
       </Card>
 
