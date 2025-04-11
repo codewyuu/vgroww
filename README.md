@@ -1,73 +1,55 @@
-# Welcome to your Lovable project
 
-## Project info
+# GrowthSim - Startup Growth Simulator
 
-**URL**: https://lovable.dev/projects/5961cb3d-eeed-45cf-a426-123ff2581669
+GrowthSim is a powerful tool for modeling a startup's growth trajectory based on inputs like marketing spend, user acquisition rates, and churn.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- Interactive dashboard with key metrics
+- Data visualization with customizable charts
+- Dataset management for your growth models
+- Roadmap creator based on keywords
+- Dark and light mode support
+- Responsive and modern UI
 
-**Use Lovable**
+## Installation
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5961cb3d-eeed-45cf-a426-123ff2581669) and start prompting.
+### Option 1: Using npm
 
-Changes made via Lovable will be committed automatically to this repo.
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/growthsim.git
+cd growthsim
 
-**Use your preferred IDE**
+# Install dependencies
+npm install
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Option 2: Using the installation script
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/growthsim.git
+cd growthsim
 
-**Use GitHub Codespaces**
+# Make the installation script executable
+chmod +x install-dependencies.js
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Run the installation script
+./install-dependencies.js
 
-## What technologies are used for this project?
+# Start the development server
+npm run dev
+```
 
-This project is built with:
+## Requirements
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- Node.js 18.x or later
+- npm 8.x or later
 
-## How can I deploy this project?
+## License
 
-Simply open [Lovable](https://lovable.dev/projects/5961cb3d-eeed-45cf-a426-123ff2581669) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+MIT
