@@ -47,7 +47,7 @@ export const Sidebar = () => {
   return (
     <div
       className={cn(
-        "h-screen fixed left-0 top-0 z-40 transition-all duration-300 bg-sidebar border-r border-sidebar-border",
+        "h-screen fixed left-0 top-0 z-40 transition-all duration-300 bg-sidebar super-shadow",
         collapsed ? "w-16" : "w-64"
       )}
     >
@@ -74,7 +74,7 @@ export const Sidebar = () => {
                   key={item.path}
                   variant={location.pathname === item.path ? "default" : "ghost"}
                   className={cn(
-                    "w-full justify-start mb-1",
+                    "w-full justify-start mb-1 rounded-lg",
                     location.pathname === item.path 
                       ? "bg-sidebar-primary text-sidebar-primary-foreground" 
                       : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
@@ -99,7 +99,7 @@ export const Sidebar = () => {
             variant="outline" 
             size="icon" 
             onClick={toggleTheme}
-            className="w-full justify-center"
+            className="w-full justify-center rounded-lg"
           >
             {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             {!collapsed && <span className="ml-2">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>}

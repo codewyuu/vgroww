@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -62,12 +61,27 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				'super-orange': '#FF9900',
+				'super-gray': {
+					50: '#FAFAFA',
+					100: '#F5F5F5',
+					200: '#E5E5E5',
+					300: '#D4D4D4',
+					400: '#A3A3A3',
+					500: '#737373',
+					600: '#525252',
+					700: '#404040',
+					800: '#262626',
+					900: '#171717',
 				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				sm: 'calc(var(--radius) - 4px)',
+				xl: '0.75rem',
+				'2xl': '1rem',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -111,6 +125,11 @@ export default {
 				'fade-in': 'fade-in 0.3s ease-out',
 				'slide-in': 'slide-in 0.3s ease-out',
 				'slide-out': 'slide-out 0.3s ease-out'
+			},
+			boxShadow: {
+				'super-sm': '0 1px 2px 0 rgba(0, 0, 0, 0.03)',
+				'super': '0 3px 5px 0 rgba(0, 0, 0, 0.04)',
+				'super-md': '0 5px 15px 0 rgba(0, 0, 0, 0.05)',
 			}
 		}
 	},
