@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BarChart, LineChart, PieChart } from '@/components/ui/chart';
+import { BarChart, LineChart, PieChart } from '@/components/charts';
 import { Button } from '@/components/ui/button';
 import { 
   TrendingUp, 
