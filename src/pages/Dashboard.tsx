@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, LineChart, PieChart } from '@/components/charts';
@@ -12,8 +13,11 @@ import {
   IndianRupee 
 } from 'lucide-react';
 import { formatIndianRupees } from '@/components/visualization/CurrencyFormatter';
+import { useMarketingData } from '@/context/MarketingDataContext';
 
 const Dashboard = () => {
+  const { metrics } = useMarketingData();
+  
   // Mock data for charts
   const lineChartData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
@@ -52,6 +56,11 @@ const Dashboard = () => {
     ],
   };
 
+  // Calculate trend directions based on metrics
+  const revenueDirection = parseFloat(metrics.monthlyRevenue) >= 20000;
+  const churnDirection = parseFloat(metrics.churnRate) <= 5.5;
+  const growthDirection = parseFloat(metrics.growthRate) >= 10.0;
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -80,10 +89,15 @@ const Dashboard = () => {
             <IndianRupee className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹24,780</div>
+            <div className="text-2xl font-bold">₹{parseInt(metrics.monthlyRevenue).toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">
-              <span className="text-emerald-500 flex items-center">
-                <ArrowUpRight className="mr-1 h-4 w-4" />+8.2%
+              <span className={`flex items-center ${revenueDirection ? 'text-emerald-500' : 'text-red-500'}`}>
+                {revenueDirection ? (
+                  <ArrowUpRight className="mr-1 h-4 w-4" />
+                ) : (
+                  <ArrowDownRight className="mr-1 h-4 w-4" />
+                )}
+                {revenueDirection ? '+8.2%' : '-3.5%'}
               </span> from last month
             </p>
           </CardContent>
@@ -94,10 +108,15 @@ const Dashboard = () => {
             <Percent className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">5.2%</div>
+            <div className="text-2xl font-bold">{metrics.churnRate}%</div>
             <p className="text-xs text-muted-foreground">
-              <span className="text-red-500 flex items-center">
-                <ArrowDownRight className="mr-1 h-4 w-4" />+0.5%
+              <span className={`flex items-center ${churnDirection ? 'text-emerald-500' : 'text-red-500'}`}>
+                {churnDirection ? (
+                  <ArrowDownRight className="mr-1 h-4 w-4" />
+                ) : (
+                  <ArrowUpRight className="mr-1 h-4 w-4" />
+                )}
+                {churnDirection ? '-0.3%' : '+0.5%'}
               </span> from last month
             </p>
           </CardContent>
@@ -108,10 +127,15 @@ const Dashboard = () => {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12.5%</div>
+            <div className="text-2xl font-bold">{metrics.growthRate}%</div>
             <p className="text-xs text-muted-foreground">
-              <span className="text-emerald-500 flex items-center">
-                <ArrowUpRight className="mr-1 h-4 w-4" />+2.1%
+              <span className={`flex items-center ${growthDirection ? 'text-emerald-500' : 'text-red-500'}`}>
+                {growthDirection ? (
+                  <ArrowUpRight className="mr-1 h-4 w-4" />
+                ) : (
+                  <ArrowDownRight className="mr-1 h-4 w-4" />
+                )}
+                {growthDirection ? '+2.1%' : '-1.3%'}
               </span> from last month
             </p>
           </CardContent>

@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { toast } from 'sonner';
 import { UploadCloud, Save, Download, Plus, AlertTriangle, FileUp, X, Calculator } from 'lucide-react';
 import { parseCSV, objectsToCSV, downloadFile } from '@/utils/csvUtils';
+import { useMarketingData } from '@/context/MarketingDataContext';
 
 type MarketingData = {
   channel: string;
@@ -32,6 +33,7 @@ type DataSetType = {
 };
 
 const DataSets = () => {
+  const { updateMetrics } = useMarketingData();
   const [activeTab, setActiveTab] = useState("marketing");
   const [marketingData, setMarketingData] = useState<MarketingData[]>([
     {
@@ -162,6 +164,19 @@ const DataSets = () => {
   };
 
   const handleSaveData = () => {
+    const cleanMonthlyRevenue = monthlyRevenue.replace(/[$,]/g, '');
+    const cleanChurnRate = churnRate.replace(/%/g, '');
+    const cleanGrowthRate = growthRate.replace(/%/g, '');
+    
+    if (cleanMonthlyRevenue && cleanChurnRate && cleanGrowthRate) {
+      updateMetrics({
+        monthlyRevenue: cleanMonthlyRevenue,
+        churnRate: cleanChurnRate,
+        growthRate: cleanGrowthRate
+      });
+      toast.success("Dashboard metrics updated successfully");
+    }
+
     const newEntry: MarketingData = {
       channel: getChannelLabel(channel),
       period: getPeriodLabel(period),
