@@ -55,7 +55,7 @@ export const Sidebar = () => {
         <div>
           <div className="flex items-center justify-between p-4 h-16 border-b border-sidebar-border">
             {!collapsed && (
-              <h1 className="font-bold text-xl text-sidebar-foreground">GrowthSim</h1>
+              <h1 className="font-bold text-xl text-sidebar-foreground">vgroww</h1>
             )}
             <Button 
               variant="ghost" 
@@ -90,6 +90,11 @@ export const Sidebar = () => {
         </div>
 
         <div className="p-4 border-t border-sidebar-border">
+          {!collapsed && (
+            <div className="text-xs text-sidebar-foreground/70 mb-2 text-center">
+              © 2025 vgroww
+            </div>
+          )}
           <Button 
             variant="outline" 
             size="icon" 
