@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
-import { UploadCloud, Save, Download, Plus, AlertTriangle, FileUp, X } from 'lucide-react';
+import { UploadCloud, Save, Download, Plus, AlertTriangle, FileUp, X, Calculator } from 'lucide-react';
 import { parseCSV, objectsToCSV, downloadFile } from '@/utils/csvUtils';
 
 type MarketingData = {
@@ -18,6 +18,9 @@ type MarketingData = {
   acquisitions: string;
   cac: string;
   conversion: string;
+  monthlyRevenue?: string;
+  churnRate?: string;
+  growthRate?: string;
   notes?: string;
 };
 
@@ -78,6 +81,13 @@ const DataSets = () => {
   const [cac, setCAC] = useState('10');
   const [period, setPeriod] = useState('q1_2023');
   const [notes, setNotes] = useState('');
+  
+  const [revenuePerCustomer, setRevenuePerCustomer] = useState('100');
+  const [previousAcquisitions, setPreviousAcquisitions] = useState('450');
+  const [churnPercentage, setChurnPercentage] = useState('5');
+  const [monthlyRevenue, setMonthlyRevenue] = useState('');
+  const [churnRate, setChurnRate] = useState('');
+  const [growthRate, setGrowthRate] = useState('');
   
   const [newDataSetName, setNewDataSetName] = useState('');
   const [showNewDataSetForm, setShowNewDataSetForm] = useState(false);
@@ -159,13 +169,39 @@ const DataSets = () => {
       acquisitions: acquisitions,
       cac: `$${cac}`,
       conversion: `${conversion}%`,
+      monthlyRevenue: monthlyRevenue ? `$${monthlyRevenue}` : undefined,
+      churnRate: churnRate ? `${churnRate}%` : undefined,
+      growthRate: growthRate ? `${growthRate}%` : undefined,
       notes: notes
     };
 
     setMarketingData([...marketingData, newEntry]);
     toast.success("Data saved successfully");
     
+    setMonthlyRevenue('');
+    setChurnRate('');
+    setGrowthRate('');
     setNotes('');
+  };
+
+  const calculateFormulas = () => {
+    try {
+      const calculatedMonthlyRevenue = (parseFloat(acquisitions) * parseFloat(revenuePerCustomer)).toFixed(2);
+      
+      const calculatedChurnRate = churnPercentage;
+      
+      const acquisitionsDiff = parseFloat(acquisitions) - parseFloat(previousAcquisitions);
+      const calculatedGrowthRate = ((acquisitionsDiff / parseFloat(previousAcquisitions)) * 100).toFixed(2);
+      
+      setMonthlyRevenue(calculatedMonthlyRevenue);
+      setChurnRate(calculatedChurnRate);
+      setGrowthRate(calculatedGrowthRate);
+      
+      toast.success("Formulas calculated successfully");
+    } catch (error) {
+      console.error("Error calculating formulas:", error);
+      toast.error("Error calculating formulas. Please check your inputs.");
+    }
   };
 
   const handleCreateNewDataSet = () => {
@@ -211,7 +247,7 @@ const DataSets = () => {
     };
     return periodMap[value] || value;
   };
-  
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -350,6 +386,73 @@ const DataSets = () => {
                     onChange={(e) => setNotes(e.target.value)}
                   />
                 </div>
+
+                <div className="border-t pt-4">
+                  <h3 className="text-lg font-medium mb-4">Formula Calculations</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="revenuePerCustomer">Revenue Per Customer ($)</Label>
+                      <Input 
+                        id="revenuePerCustomer" 
+                        placeholder="e.g. 100" 
+                        type="number" 
+                        value={revenuePerCustomer}
+                        onChange={(e) => setRevenuePerCustomer(e.target.value)}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="previousAcquisitions">Previous Period Acquisitions</Label>
+                      <Input 
+                        id="previousAcquisitions" 
+                        placeholder="e.g. 450" 
+                        type="number" 
+                        value={previousAcquisitions}
+                        onChange={(e) => setPreviousAcquisitions(e.target.value)}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="churnPercentage">Churn Percentage (%)</Label>
+                      <Input 
+                        id="churnPercentage" 
+                        placeholder="e.g. 5" 
+                        type="number" 
+                        step="0.1" 
+                        value={churnPercentage}
+                        onChange={(e) => setChurnPercentage(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="monthlyRevenue">Monthly Revenue</Label>
+                      <Input 
+                        id="monthlyRevenue" 
+                        value={monthlyRevenue ? `$${monthlyRevenue}` : ''}
+                        readOnly
+                        className="bg-muted"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="churnRate">Churn Rate</Label>
+                      <Input 
+                        id="churnRate" 
+                        value={churnRate ? `${churnRate}%` : ''}
+                        readOnly
+                        className="bg-muted"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="growthRate">Growth Rate</Label>
+                      <Input 
+                        id="growthRate" 
+                        value={growthRate ? `${growthRate}%` : ''}
+                        readOnly
+                        className="bg-muted"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </CardContent>
             <CardFooter className="flex justify-between">
@@ -357,10 +460,20 @@ const DataSets = () => {
                 <AlertTriangle className="h-4 w-4 mr-2" />
                 <span className="text-sm">Remember to save your changes</span>
               </div>
-              <Button className="flex items-center gap-2" onClick={handleSaveData}>
-                <Save className="h-4 w-4" />
-                <span>Save Data</span>
-              </Button>
+              <div className="flex gap-2">
+                <Button 
+                  variant="outline" 
+                  className="flex items-center gap-2" 
+                  onClick={calculateFormulas}
+                >
+                  <Calculator className="h-4 w-4" />
+                  <span>Calculate</span>
+                </Button>
+                <Button className="flex items-center gap-2" onClick={handleSaveData}>
+                  <Save className="h-4 w-4" />
+                  <span>Save Data</span>
+                </Button>
+              </div>
             </CardFooter>
           </Card>
           
@@ -385,6 +498,9 @@ const DataSets = () => {
                     <TableHead className="text-right">Acquisitions</TableHead>
                     <TableHead className="text-right">CAC</TableHead>
                     <TableHead className="text-right">Conversion</TableHead>
+                    <TableHead className="text-right">Monthly Revenue</TableHead>
+                    <TableHead className="text-right">Churn Rate</TableHead>
+                    <TableHead className="text-right">Growth Rate</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -396,6 +512,9 @@ const DataSets = () => {
                       <TableCell className="text-right">{row.acquisitions}</TableCell>
                       <TableCell className="text-right">{row.cac}</TableCell>
                       <TableCell className="text-right">{row.conversion}</TableCell>
+                      <TableCell className="text-right">{row.monthlyRevenue || '-'}</TableCell>
+                      <TableCell className="text-right">{row.churnRate || '-'}</TableCell>
+                      <TableCell className="text-right">{row.growthRate || '-'}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

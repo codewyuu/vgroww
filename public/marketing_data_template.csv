@@ -1,6 +1,6 @@
 
-channel,period,spend,acquisitions,cac,conversion,notes
-Social Media,Q1 2023,$12500,1250,$10,2.5%,Facebook and Instagram campaigns
-Search Engine,Q1 2023,$15000,1000,$15,3.2%,Google Ads focused on brand terms
-Content Marketing,Q1 2023,$8000,400,$20,1.8%,Blog posts and ebooks
-Email Marketing,Q1 2023,$3500,500,$7,5.1%,Newsletter campaign
+channel,period,spend,acquisitions,cac,conversion,monthlyRevenue,churnRate,growthRate,notes
+Social Media,Q1 2023,$12500,1250,$10,2.5%,$125000,5%,10%,Facebook and Instagram campaigns
+Search Engine,Q1 2023,$15000,1000,$15,3.2%,$100000,4.5%,8.2%,Google Ads focused on brand terms
+Content Marketing,Q1 2023,$8000,400,$20,1.8%,$40000,6%,-2.5%,Blog posts and ebooks
+Email Marketing,Q1 2023,$3500,500,$7,5.1%,$50000,3%,15%,Newsletter campaign
