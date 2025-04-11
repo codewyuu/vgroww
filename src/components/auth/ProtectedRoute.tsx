@@ -10,11 +10,7 @@ const ProtectedRoute: React.FC = () => {
     return <Navigate to="/login" replace />;
   }
 
-  return (
-    <div className="max-w-full overflow-x-hidden">
-      <Outlet />
-    </div>
-  );
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

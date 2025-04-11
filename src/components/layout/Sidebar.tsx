@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { 
@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '@/components/theme/ThemeProvider';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 type NavItem = {
   name: string;
@@ -32,18 +31,10 @@ const navItems: NavItem[] = [
 ];
 
 export const Sidebar = () => {
-  const isMobile = useIsMobile();
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { theme, setTheme } = useTheme();
-
-  // Auto-collapse sidebar on mobile
-  useEffect(() => {
-    if (isMobile) {
-      setCollapsed(true);
-    }
-  }, [isMobile]);
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
@@ -57,12 +48,12 @@ export const Sidebar = () => {
     <div
       className={cn(
         "h-screen fixed left-0 top-0 z-40 transition-all duration-300 bg-sidebar super-shadow",
-        collapsed ? "w-14" : "w-64"
+        collapsed ? "w-16" : "w-64"
       )}
     >
       <div className="flex flex-col h-full justify-between">
         <div>
-          <div className="flex items-center justify-between p-2 sm:p-4 h-16 border-b border-sidebar-border">
+          <div className="flex items-center justify-between p-4 h-16 border-b border-sidebar-border">
             {!collapsed && (
               <h1 className="font-bold text-xl text-sidebar-foreground">vgroww</h1>
             )}
@@ -72,11 +63,11 @@ export const Sidebar = () => {
               onClick={toggleSidebar}
               className="ml-auto"
             >
-              {collapsed ? <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" /> : <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />}
+              {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
             </Button>
           </div>
 
-          <div className="px-1 sm:px-2 py-2 sm:py-4">
+          <div className="px-2 py-4">
             <nav className="space-y-1">
               {navItems.map((item) => (
                 <Button
@@ -84,7 +75,6 @@ export const Sidebar = () => {
                   variant={location.pathname === item.path ? "default" : "ghost"}
                   className={cn(
                     "w-full justify-start mb-1 rounded-lg",
-                    collapsed ? "px-2" : "",
                     location.pathname === item.path 
                       ? "bg-sidebar-primary text-sidebar-primary-foreground" 
                       : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
@@ -99,7 +89,7 @@ export const Sidebar = () => {
           </div>
         </div>
 
-        <div className="p-2 sm:p-4 border-t border-sidebar-border">
+        <div className="p-4 border-t border-sidebar-border">
           {!collapsed && (
             <div className="text-xs text-sidebar-foreground/70 mb-2 text-center">
               © 2025 vgroww
@@ -111,7 +101,7 @@ export const Sidebar = () => {
             onClick={toggleTheme}
             className="w-full justify-center rounded-lg"
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4 sm:w-5 sm:h-5" /> : <Moon className="w-4 h-4 sm:w-5 sm:h-5" />}
+            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             {!collapsed && <span className="ml-2">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>}
           </Button>
         </div>
