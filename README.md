@@ -18,7 +18,7 @@ vgroww is a powerful tool for modeling a startup's growth trajectory based on in
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/vgroww.git
+git clone https://github.com/codewyuu/vgroww.git
 cd vgroww
 
 # Install dependencies
@@ -28,21 +28,6 @@ npm install
 npm run dev
 ```
 
-### Option 2: Using the installation script
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/vgroww.git
-cd vgroww
-
-# Make the installation script executable
-chmod +x install-dependencies.js
-
-# Run the installation script
-./install-dependencies.js
-
-# Start the development server
-npm run dev
 ```
 
 ## Requirements
@@ -52,4 +37,4 @@ npm run dev
 
 ## License
 
-MIT
+YUVRAJ
