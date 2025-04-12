@@ -4,12 +4,16 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install",
-  "routes": [
-    { "handle": "filesystem" },
+  "builds": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
     {
       "src": "/(.*)",
       "dest": "/index.html"
@@ -18,4 +22,4 @@
   "env": {
     "NODE_ENV": "production"
   }
-}
+} 
