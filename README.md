@@ -1,14 +1,14 @@
-
 # vgroww - Startup Growth Simulator
 
 vgroww is a powerful tool for modeling a startup's growth trajectory based on inputs like marketing spend, user acquisition rates, and churn.
 
-
 ### 📸 App Screenshot
-![App Screenshot](assets/image8.png)
 
-![App Screenshot](assets/image7.png)
+![Login page](public/assets/image8.png)
 
+![Dashboard](public/assets/image7.png)
+
+![Datasets](public/assets/image5.png)
 
 ## Features
 
@@ -45,3 +45,4 @@ npm run dev
 ## License
 
 YUVRAJ
+```
