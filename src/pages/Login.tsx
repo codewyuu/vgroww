@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -25,14 +24,21 @@ const Login: React.FC = () => {
     <div 
       className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat"
       style={{ 
-        backgroundImage: 'url("/lovable-uploads/d8b1d151-0a13-41b0-bc3f-629b96e79966.png")',
+        backgroundImage: 'url("/uploads/d8b1d151-0a13-41b0-bc3f-629b96e79966.png")',
         backgroundColor: 'rgba(0, 0, 0, 0.5)', // Darkening overlay
         backgroundBlendMode: 'overlay' // This creates the transparency effect
       }}
     >
       <Card className="w-full max-w-md shadow-lg bg-white/90 dark:bg-black/80 backdrop-blur-sm border-opacity-20">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">vgroww</CardTitle>
+          <div className="flex items-center justify-center gap-2">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="4" fill="#2563EB"/>
+              <path d="M6 22L12 16L18 20L26 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M26 12V8H22" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <CardTitle className="text-2xl font-bold">vgroww</CardTitle>
+          </div>
           <CardDescription className="text-center">
             Enter your credentials to access the dashboard
           </CardDescription>

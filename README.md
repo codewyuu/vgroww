@@ -10,6 +10,10 @@ vgroww is a powerful tool for modeling a startup's growth trajectory based on in
 
 ![Datasets](public/assets/image5.png)
 
+![Roadmap creator](public/assets/image3.png)
+
+![Dark Mode toggel](public/assets/image.png)
+
 ## Features
 
 - Interactive dashboard with key metrics
@@ -19,9 +23,13 @@ vgroww is a powerful tool for modeling a startup's growth trajectory based on in
 - Dark and light mode support
 - Responsive and modern UI
 
+
+## 🎯 Project Presentation
+
+📂 [Download Presentation Slides](public/assets/vgroww%20ppt.pdf)
+
 ## Installation
 
-### Option 1: Using npm
 
 ```bash
 # Clone the repository
