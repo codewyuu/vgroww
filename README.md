@@ -46,6 +46,9 @@ npm run dev
 ```
 
 ## Requirements
+## login credentials for public
+username - venkypallets
+password - venky1234
 
 - Node.js 18.x or later
 - npm 8.x or later
