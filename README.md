@@ -30,7 +30,6 @@ vgroww is a powerful tool for modeling a startup's growth trajectory based on in
 
 ## Installation
 
-
 ```bash
 # Clone the repository
 git clone https://github.com/codewyuu/vgroww.git
