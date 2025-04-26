@@ -1,6 +1,6 @@
 # vgroww - Startup Growth Simulator
 
-Credentials for website-
+##Credentials for website-
 Username: venkypallets
 Password: venky1234
 
@@ -58,5 +58,5 @@ password - venky1234
 
 ## License
 
-YUVRAJ
+Pallets
 ```
