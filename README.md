@@ -1,9 +1,5 @@
 # vgroww - Startup Growth Simulator
 
-Credentials for website-
-Username: venkypallets
-Password: venky1234
-
 vgroww is a powerful tool for modeling a startup's growth trajectory based on inputs like marketing spend, user acquisition rates, and churn.
 
 ### 📸 App Screenshot
